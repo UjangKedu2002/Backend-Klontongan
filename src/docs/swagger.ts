@@ -1,5 +1,7 @@
 import swaggerJsdoc from "swagger-jsdoc";
 
+const railwayUrl = "https://backend-klontongan-production.up.railway.app";
+
 const options: swaggerJsdoc.Options = {
   definition: {
     openapi: "3.0.0",
@@ -12,7 +14,12 @@ const options: swaggerJsdoc.Options = {
 
     servers: [
       {
+        url: railwayUrl,
+        description: "Production Server - Railway",
+      },
+      {
         url: "http://localhost:5000",
+        description: "Local Development Server",
       },
     ],
 
