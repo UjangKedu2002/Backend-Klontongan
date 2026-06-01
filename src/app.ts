@@ -8,6 +8,7 @@ import cors from "cors";
 import swaggerUi from "swagger-ui-express";
 
 import authRoute from "./routes/auth.route";
+import categoryRoute from "./routes/category.route";
 import productRoute from "./routes/product.route";
 import cartRoute from "./routes/cart.route";
 import checkoutRoute from "./routes/checkout.route";
@@ -21,7 +22,6 @@ import swaggerSpec from "./docs/swagger";
 const app = express();
 
 // MIDDLEWARE
-
 app.use(cors());
 
 app.use(express.json());
@@ -33,12 +33,12 @@ app.use(
 );
 
 // SWAGGER
-
 app.use("/api/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // ROUTES
-
 app.use("/api/auth", authRoute);
+
+app.use("/api/categories", categoryRoute);
 
 app.use("/api/products", productRoute);
 
@@ -55,7 +55,6 @@ app.use("/api/dashboard", dashboardRoute);
 app.use("/api/upload", uploadRoute);
 
 // ROOT
-
 app.get("/", (_req, res) => {
   res.status(200).json({
     success: true,
@@ -64,7 +63,6 @@ app.get("/", (_req, res) => {
 });
 
 // 404 HANDLER
-
 app.use((_req, res) => {
   res.status(404).json({
     success: false,
@@ -73,7 +71,6 @@ app.use((_req, res) => {
 });
 
 // SERVER
-
 const PORT = Number(process.env.PORT) || 5000;
 
 app.listen(PORT, () => {
